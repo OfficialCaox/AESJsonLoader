@@ -40,7 +40,7 @@ public static class Ex
     }
     public static T Load<T>(string ID, T dafaultValue)
     {
-        return AESJsonLoader.LoadData<T>(ID, dafaultValue);
+        return AESJsonLoader.Load<T>(ID, dafaultValue);
     }
 }
 

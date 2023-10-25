@@ -10,7 +10,7 @@ using UnityEngine.Purchasing.MiniJSON;
 public class AESJsonLoader : MonoBehaviour
 {
     const string RESOURCE_PATH = "/Resources/Data/JsonData/";
-
+    const string KEY = "asd123";
 
     public static void Save<T>(string ID, T data)
     {
@@ -24,13 +24,13 @@ public class AESJsonLoader : MonoBehaviour
 
             if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                jsonString = EncryptAES256.Encrypt256(jsonString, JsonLoader.key);
+                jsonString = EncryptAES256.Encrypt256(jsonString, KEY);
                 File.WriteAllText(Application.persistentDataPath + "/" + ID + ".json", jsonString);
             }
             else
             {
                 //Commented for convenient testing on PC
-                //jsonString = EncryptAES256.Encrypt256(jsonString, SafetyLoader.key);
+                //jsonString = EncryptAES256.Encrypt256(jsonString, KEY);
                 File.WriteAllText(Application.dataPath + RESOURCE_PATH + ID + ".json", jsonString);
             }
         }
@@ -39,7 +39,7 @@ public class AESJsonLoader : MonoBehaviour
             Debug.Log("Error Save :" + e.ToString());
         }
     }
-    public static T LoadData<T>(string ID, T dafaultValue)
+    public static T LoadT>(string ID, T dafaultValue)
     {
         try
         {
@@ -51,7 +51,7 @@ public class AESJsonLoader : MonoBehaviour
                     return dafaultValue;
                 }
                 string data = File.ReadAllText(Application.persistentDataPath + "/" + ID + ".json");
-                data = EncryptAES256.Decrypt256(data, JsonLoader.key);            
+                data = EncryptAES256.Decrypt256(data, KEY);            
                 return JsonConvert.DeserializeObject<T>(data);
             }
             else
@@ -62,7 +62,7 @@ public class AESJsonLoader : MonoBehaviour
                     return dafaultValue;
                 }
                 string data = File.ReadAllText(Application.dataPath + RESOURCE_PATH + ID + ".json");
-                //data = EncryptAES256.Decrypt256(data, SafetyLoader.key);
+                //data = EncryptAES256.Decrypt256(data, KEY);
                 return JsonConvert.DeserializeObject<T>(data);
             }
         }
