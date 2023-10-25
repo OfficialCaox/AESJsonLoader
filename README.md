@@ -4,6 +4,9 @@ AESJsonLoader
 
 Using Like, 
 
+
+<pre>
+<code>
 public static int Gold
     {
         get
@@ -41,3 +44,5 @@ public static int Gold
     {
         return AESJsonLoader.LoadData<T>(ID, dafaultValue);
     }
+</code>
+</pre>
